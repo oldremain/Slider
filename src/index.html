@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=Roboto:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./scss/style.scss" />
+    <title>Slider</title>
+  </head>
+  <body>
+    <section class="slider">
+      <div class="slider__container container">
+        <div class="slider__wrap">
+          <div class="slider__header header">
+            <h1 class="header__title">Cars</h1>
+            <div class="header__nav">
+              <button class="header__btn-prev btn"></button>
+              <span id="current">01</span>
+              <span id="total"></span>
+              <button class="header__btn-next btn"></button>
+            </div>
+          </div>
+          <div class="slider__content slider-content">
+            <div class="slider-content__inner">
+              <div class="slider-content__item">
+                <img src="./img/audi.jpg" alt="audi" />
+              </div>
+              <div class="slider-content__item">
+                <img src="./img/chev.jpg" alt="chevrolete" />
+              </div>
+              <div class="slider-content__item">
+                <img src="./img/corvete.jpg" alt="corvete" />
+              </div>
+              <div class="slider-content__item">
+                <img src="./img/merce.jpg" alt="mersedec" />
+              </div>
+              <div class="slider-content__item">
+                <img src="./img/porshe.jpg" alt="porshe" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script type="module" src="./js/script.js"></script>
+  </body>
+</html>

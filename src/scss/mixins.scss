@@ -1,0 +1,24 @@
+@mixin body-bg {
+  background: linear-gradient(to bottom, #323232 0%, #3f3f3f 40%, #1c1c1c 150%),
+    linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(0, 0, 0, 0.25) 200%
+    );
+}
+@mixin f-awesome {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 25px;
+  color: aliceblue;
+}
+@mixin text-bg {
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  background-clip: text;
+  color: transparent;
+}
+@mixin current-bg {
+  background: linear-gradient(to right, #ee9ca7, #ffdde1);
+  background-clip: text;
+  color: transparent;
+}
