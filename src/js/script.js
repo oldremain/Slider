@@ -7,6 +7,8 @@ const slides = document.querySelectorAll('.slider-content__item'),
   slidesField = document.querySelector('.slider-content__inner'),
   width = window.getComputedStyle(slidesWrapper).width;
 
+console.log(width);
+
 slidesField.style.cssText = `display:flex; transition:all 0.5s ease; width:${
   100 * slides.length
 }%`;
@@ -26,10 +28,10 @@ if (slides.length < 10) {
 }
 
 next.addEventListener('click', () => {
-  if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+  if (offset == +width.slice(0, -2) * (slides.length - 1)) {
     offset = 0;
   } else {
-    offset += +width.slice(0, width.length - 2);
+    offset += +width.slice(0, -2);
   }
 
   slidesField.style.transform = `translateX(-${offset}px)`;
@@ -49,9 +51,9 @@ next.addEventListener('click', () => {
 
 prev.addEventListener('click', () => {
   if (offset == 0) {
-    offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+    offset = +width.slice(0, -2) * (slides.length - 1);
   } else {
-    offset -= +width.slice(0, width.length - 2);
+    offset -= +width.slice(0, -2);
   }
 
   slidesField.style.transform = `translateX(-${offset}px)`;
