@@ -1,5 +1,7 @@
 .slider__content {
-  width: 100%;
+  //   width: 100%;
+  max-width: 600px;
+  height: 400px;
   overflow: hidden;
 }
 .slider-content__inner {
@@ -22,9 +24,16 @@
   display: none;
 }
 
+@media (max-width: 768px) {
+  .slider__content {
+    width: 90%;
+  }
+  .slider-content__item {
+    width: 90%;
+  }
+}
 @media (max-width: 468px) {
   .slider-content__item {
-    max-width: 600px;
     height: 300px;
   }
 }
