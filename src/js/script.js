@@ -17,19 +17,15 @@ slides.forEach((slide) => (slide.style.width = width));
 let sliderIndex = 1;
 let offset = 0;
 
-if (slides.length < 10) {
-  total.textContent = `/0${slides.length}`;
-  current.textContent = `0${sliderIndex}`;
-} else {
-  total.textContent = `/${slides.length}`;
-  current.textContent = sliderIndex;
-}
+showTotalNumberSlides(slides.length);
+showCurrentSliderIndex(sliderIndex);
 
+//Создаем навигацию по слайдам(dot`s)
 const indicators = document.createElement('ul');
 indicators.classList.add('carousel-indicators');
 slidesWrapper.append(indicators);
 
-const dots = [];
+const dots = []; //Создаём массив элементов, состоящий из элементов навигации
 
 for (let i = 0; i < slides.length; i++) {
   let dot = document.createElement('li');
@@ -42,58 +38,26 @@ for (let i = 0; i < slides.length; i++) {
     dot.style.opacity = 1;
   }
 }
-next.addEventListener('click', () => {
-  if (offset == +width.slice(0, -2) * (slides.length - 1)) {
-    offset = 0;
-  } else {
-    offset += +width.slice(0, -2);
-  }
 
+// Логика кнопок NEXT, PREV & DOTS
+next.addEventListener('click', () => {
+  offset = increaseOffset(offset);
   slidesField.style.transform = `translateX(-${offset}px)`;
 
-  if (sliderIndex == slides.length) {
-    sliderIndex = 1;
-  } else {
-    sliderIndex++;
-  }
+  sliderIndex = increaseIndex(sliderIndex);
+  showCurrentSliderIndex(sliderIndex);
 
-  if (slides.length < 10) {
-    current.textContent = `0${sliderIndex}`;
-  } else {
-    current.textContent = sliderIndex;
-  }
-
-  dots.forEach((dot) => {
-    dot.style.opacity = '0.5';
-  });
-  dots[sliderIndex - 1].style.opacity = '1';
+  showActiveDots();
 });
 
 prev.addEventListener('click', () => {
-  if (offset == 0) {
-    offset = +width.slice(0, -2) * (slides.length - 1);
-  } else {
-    offset -= +width.slice(0, -2);
-  }
-
+  offset = decreaseOffset(offset);
   slidesField.style.transform = `translateX(-${offset}px)`;
 
-  if (sliderIndex == 1) {
-    sliderIndex = slides.length;
-  } else {
-    sliderIndex--;
-  }
+  sliderIndex = decreaseIndex(sliderIndex);
+  showCurrentSliderIndex(sliderIndex);
 
-  if (slides.length < 10) {
-    current.textContent = `0${sliderIndex}`;
-  } else {
-    current.textContent = sliderIndex;
-  }
-
-  dots.forEach((dot) => {
-    dot.style.opacity = '0.5';
-  });
-  dots[sliderIndex - 1].style.opacity = '1';
+  showActiveDots();
 });
 
 dots.forEach((dot) => {
@@ -105,15 +69,64 @@ dots.forEach((dot) => {
     offset = +width.slice(0, -2) * (sliderIndex - 1);
     slidesField.style.transform = `translateX(-${offset}px)`;
 
-    dots.forEach((dot) => {
-      dot.style.opacity = '0.5';
-    });
-    dots[sliderIndex - 1].style.opacity = '1';
-
-    if (slides.length < 10) {
-      current.textContent = `0${sliderIndex}`;
-    } else {
-      current.textContent = sliderIndex;
-    }
+    showActiveDots();
+    showCurrentSliderIndex(sliderIndex);
   });
 });
+
+//=========================================All functions we need=========================================//
+function showCurrentSliderIndex(index) {
+  if (slides.length < 10) {
+    current.textContent = `0${index}`;
+  } else {
+    current.textContent = index;
+  }
+}
+
+function showTotalNumberSlides(totalNum) {
+  if (slides.length < 10) {
+    total.textContent = `/0${totalNum}`;
+  } else {
+    total.textContent = `/${totalNum}`;
+  }
+}
+
+function increaseIndex(index) {
+  console.log(index);
+  if (index == slides.length) {
+    return 1;
+  } else {
+    return ++index;
+  }
+}
+
+function decreaseIndex(index) {
+  if (index == 1) {
+    return slides.length;
+  } else {
+    return --index;
+  }
+}
+
+function increaseOffset(offset) {
+  if (offset == +width.slice(0, -2) * (slides.length - 1)) {
+    return 0;
+  } else {
+    return (offset += +width.slice(0, -2));
+  }
+}
+
+function decreaseOffset(offset) {
+  if (offset == 0) {
+    return +width.slice(0, -2) * (slides.length - 1);
+  } else {
+    return (offset -= +width.slice(0, -2));
+  }
+}
+
+function showActiveDots() {
+  dots.forEach((dot) => {
+    dot.style.opacity = '0.5';
+  });
+  dots[sliderIndex - 1].style.opacity = '1';
+}
